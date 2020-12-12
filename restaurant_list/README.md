@@ -2,6 +2,8 @@
 
 A website use Node.js + Express to list restaurants information and search restaurants by name or category.
 
+![Screen Shot 2020-12-12 at 11 41 55 AM](https://user-images.githubusercontent.com/67764641/101989575-4022f000-3c6f-11eb-8813-cf0c3a88566d.png)
+
 ## Summary
 
   - [Getting Started](#getting-started)
