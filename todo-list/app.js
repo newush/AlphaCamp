@@ -5,6 +5,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 mongoose.connect('mongodb://localhost/todo-list', {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection
+const Todo = require('./modules/todo')
 
 db.on('error', () => {
   console.log('mongodb error')
@@ -16,7 +17,10 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', 'hbs')
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.render('index')
+  Todo.find()
+    .lean()
+    .then(todos => res.render('index', { todos: todos }))
+    .catch(error => console.error(error))
 })
 
 // 設定 port 3000
