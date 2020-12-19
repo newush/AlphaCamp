@@ -27,20 +27,35 @@ app.get('/', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
-  function includesKeyword(text, keyword) {
-    return text.toLowerCase().includes(keyword.toLowerCase())
-  }
   const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter(restaurant =>
-    includesKeyword(restaurant.name, keyword) || includesKeyword(restaurant.category, keyword)
-  )
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+  //改為搜尋自  model seeds 裡資料
+  Restaurant.find(
+    {
+      $or: [
+        { name: { $regex: keyword, $options: "i" } },
+        { category: { $regex: keyword, $options: "i" } }
+      ]
+    })
+    .lean()
+    .then((restaurants) => {
+      res.render('index', { restaurants, keyword })
+    })
+    .catch(error => console.log(error))
+})
+
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurant })
+  Restaurant.findById(req.params.restaurant_id)
+    .lean()
+    .then((restaurant) => {
+      res.render('show', { restaurant })
+    })
+    .catch(error => console.log(error))
 })
+
 
 app.listen(port, () => {
   console.log('express is listening on localhost:${port}')
