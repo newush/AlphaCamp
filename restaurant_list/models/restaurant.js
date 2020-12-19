@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const restauratSchema = new Schema ({
+const restauratSchema = new Schema({
     name: {
-        type: String, 
+        type: String,
         requried: true
     },
     name_en: {
         type: String,
-        requried:  true
+        requried: true
     },
     category: {
         type: String,
@@ -39,15 +39,3 @@ const restauratSchema = new Schema ({
     }
 })
 module.exports = mongoose.model('Restaurant', restauratSchema)
-// const restaurantSchema = new Schema ({
-//     name: String,
-//     name_en: String,
-//     category: String,
-//     image: String,
-//     location: String,
-//     phone: String,
-//     google_map: String,
-//     rating: Number,
-//     description: String,
-//     required: true
-// })

@@ -6,8 +6,8 @@ const restaurantList = require('./restaurants.json')
 const mongoose = require('mongoose')
 const db = mongoose.connection
 const Restaurant = require('./models/restaurant')
-
-mongoose.connect('mongodb://localhost/restaurant_list')
+const bodyParser = require('body-parser')
+mongoose.connect('mongodb://localhost/restaurant_list', { useNewUrlParser: true, useUnifiedTopology: true })
 db.on('error', () => {
   console.log('mongodb error')
 })
@@ -17,13 +17,12 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
-
+app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.error(error))
-  // res.render(`index`, { restaurants: restaurantList.results }) 沒有資料庫時 自.json檔取資料的寫法
 })
 
 app.get('/search', (req, res) => {
@@ -56,6 +55,21 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.post('/restaurants', (req, res) => {
+  const name = req.body.name
+  const category = req.body.category
+  const name_en = req.body.name_en
+  const location = req.body.location
+  const phone = req.body.phone
+  const rating = req.body.rating
+  const image = req.body.image
+  const google_map = req.body.google_map
+  const description = req.body.description
+
+  return Restaurant.create({ name, category, name_en, location, phone, rating, image, google_map, description })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 app.listen(port, () => {
   console.log('express is listening on localhost:${port}')
