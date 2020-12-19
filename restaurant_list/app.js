@@ -5,6 +5,8 @@ const exphbs = require('express-handlebars')
 const restaurantList = require('./restaurants.json')
 const mongoose = require('mongoose')
 const db = mongoose.connection
+const Restaurant = require('./models/restaurant')
+
 mongoose.connect('mongodb://localhost/restaurant_list')
 db.on('error', () => {
   console.log('mongodb error')
@@ -17,7 +19,11 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render(`index`, { restaurants: restaurantList.results })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.error(error))
+  // res.render(`index`, { restaurants: restaurantList.results }) 沒有資料庫時 自.json檔取資料的寫法
 })
 
 app.get('/search', (req, res) => {
@@ -30,6 +36,7 @@ app.get('/search', (req, res) => {
   )
   res.render('index', { restaurants: restaurants, keyword: keyword })
 })
+
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
   res.render('show', { restaurant: restaurant })
