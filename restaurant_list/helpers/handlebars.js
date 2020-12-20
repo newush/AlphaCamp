@@ -6,4 +6,5 @@ module.exports = {
     return options.inverse(this);
   },
 }
-//reference: https://stackoverflow.com/questions/41423727/handlebars-registerhelper-serverside-with-expressjs
+
+// Reference: https://stackoverflow.com/questions/41423727/handlebars-registerhelper-serverside-with-expressjs

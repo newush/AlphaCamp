@@ -17,6 +17,9 @@ A website use Node.js + Express to list restaurants information and search resta
 - The user can view all restaurants information, including name, picture, category, and rating
 - The user can search restaurants by name or category
 - The user can click on a restaurant to check more details, such as an address, phone number, and description
+- The user can add a restaurant information
+- The user can edit a restaurant information
+- The user can delete a restaurant
 
 ### Prerequisites
 
@@ -25,6 +28,8 @@ A website use Node.js + Express to list restaurants information and search resta
 - nodemon v2.0.6
 - Express v4.17.1
 - Express Handlebars v5.2.0
+- Mongoose: v5.11.8
+- body-parser: v1.19.0
 
 ### Installing
 1. Clone the project
@@ -36,11 +41,15 @@ $ cd restaurant_list
 ```
 $ npm install
 ```
-3. Run server and project
+3. Run seed
 ```
-$ nodemon app.js
+$ npm run seed
 ```
-4. Open your browser `http://localhost/3000`
+4. Run server and project
+```
+$ npm run dev
+```
+5. Open your browser `http://localhost/3000`
 
 ### Versioning
 Based on Alpha Camp semester 2-3 S3
