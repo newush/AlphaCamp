@@ -3,15 +3,15 @@ const Schema = mongoose.Schema
 const restaurantSchema = new Schema({
   name: {
     type: String,
-    requried: true
+    required: true
   },
   name_en: {
     type: String,
-    requried: true
+    required: true
   },
   category: {
     type: String,
-    requried: true
+    required: true
   },
   image: {
     type: String,
@@ -31,7 +31,7 @@ const restaurantSchema = new Schema({
   },
   rating: {
     type: Number,
-    requried: true
+    required: true
   },
   description: {
     type: String,
