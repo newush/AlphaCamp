@@ -43,6 +43,14 @@
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
+      <div class="mt-1 control-bar d-flex justify-content-end">
+        <a href="/restaurants/{{restaurant._id}}/edit">
+          <button type="button" class="btn btn-info">編輯</button></a>
+        <a href="/">
+          <button type="button" class="btn btn-warning ml-3">返回</button>
+        </a>
+      </div>
+
     </div>
   </div>
 </div>
