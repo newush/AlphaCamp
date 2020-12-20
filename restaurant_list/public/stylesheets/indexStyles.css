@@ -102,3 +102,8 @@ header {
 .control-bar {
   font-size: 0.8rem;
 }
+
+.btn-delete {
+  padding: 0em;
+  font-size: 0.8rem;
+}
