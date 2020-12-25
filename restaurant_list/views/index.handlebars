@@ -20,13 +20,13 @@
   </div>
 </div>
 
-<a href="/restaurants/new" class="col-10 d-flex justify-content-end m-3">新增餐廳</a>
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         <div>
+          {{#if restaurants}}
           {{#each restaurants}}
           <a href="/restaurants/{{this._id}}" class="text-secondary">
             <div class="card mb-3">
@@ -42,17 +42,20 @@
                   {{this.rating}}
                   <i class="fas fa-star fa-xs"></i>
                 </span>
-                <div class="mt-1 control-bar d-flex justify-content-end">
-                  <a href="/restaurants/{{this._id}}/edit">編輯</a>
-                  <a href="./restaurants/{{ this._id }}" class="ml-1">詳細</a>
-                  <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
-                    onsubmit="return confirm('Do you really want to delete this restaurant?')"><button
-                      class="btn btn-danger btn-delete ml-1" type="submit">刪除</button></form>
-                </div>
+              </div>
+              <div class="card-footer mt-1 control-bar d-flex justify-content-end">
+                <a href="/restaurants/{{this._id}}/edit">編輯</a>
+                <a href="./restaurants/{{ this._id }}" class="ml-1">詳細</a>
+                <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
+                  onsubmit="return confirm('Do you really want to delete this restaurant?')"><button
+                    class="btn btn-danger btn-delete ml-1" type="submit">刪除</button></form>
               </div>
             </div>
           </a>
           {{/each}}
+          {{else}}
+          <h3>找不到資料</h3>
+          {{/if}}
         </div>
       </div>
     </div>
