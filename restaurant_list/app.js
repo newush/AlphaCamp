@@ -38,8 +38,8 @@ app.get('/search', (req, res) => {
   Restaurant.find(
     {
       $or: [
-        { name: { $regex: keyword, $options: "i" } },
-        { category: { $regex: keyword, $options: "i" } }
+        { name: { $regex: keyword, $options: 'i' } },
+        { category: { $regex: keyword, $options: 'i' } }
       ]
     })
     .lean()
@@ -126,5 +126,5 @@ app.post('/restaurants/:id/delete', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log('express is listening on localhost:${port}')
+  console.log(`express is listening on localhost:${port}`)
 })
