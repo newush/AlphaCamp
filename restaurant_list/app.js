@@ -71,46 +71,16 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 app.post('/restaurants', (req, res) => {
-  const name = req.body.name
-  const category = req.body.category
-  const name_en = req.body.name_en
-  const location = req.body.location
-  const phone = req.body.phone
-  const rating = req.body.rating
-  const image = req.body.image
-  const google_map = req.body.google_map
-  const description = req.body.description
-
-  return Restaurant.create({
-    name, category, name_en, location, phone, rating, image, google_map, description
-  })
+  return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
-  const category = req.body.category
-  const name_en = req.body.name_en
-  const location = req.body.location
-  const phone = req.body.phone
-  const rating = req.body.rating
-  const image = req.body.image
-  const google_map = req.body.google_map
-  const description = req.body.description
-
   return Restaurant.findById(id)
-    .then((restaurant) => {
-      restaurant.name = name
-      restaurant.category = category
-      restaurant.name_en = name_en
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.rating = rating
-      restaurant.image = image
-      restaurant.google_map = google_map
-      restaurant.description = description
+    .then(restaurant => {
+      restaurant = Object.assign(restaurant, req.body)
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
