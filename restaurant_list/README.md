@@ -20,6 +20,7 @@ A website use Node.js + Express to list restaurants information and search resta
 - The user can add a restaurant information
 - The user can edit a restaurant information
 - The user can delete a restaurant
+- The user can sort restaurants by name, category, location, or rating
 
 ### Prerequisites
 
@@ -30,6 +31,7 @@ A website use Node.js + Express to list restaurants information and search resta
 - Express Handlebars v5.2.0
 - Mongoose: v5.11.8
 - body-parser: v1.19.0
+- Method-Override: v3.0.0
 
 ### Installing
 1. Clone the project
