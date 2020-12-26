@@ -6,22 +6,6 @@ router.get('/new', (req, res) => {
   return res.render('new')
 })
 
-router.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  Restaurant.find(
-    {
-      $or: [
-        { name: { $regex: keyword, $options: 'i' } },
-        { category: { $regex: keyword, $options: 'i' } }
-      ]
-    })
-    .lean()
-    .then((restaurants) => {
-      res.render('index', { restaurants, keyword })
-    })
-    .catch(error => console.log(error))
-})
-
 router.post('/', (req, res) => {
   return Restaurant.create(req.body)
     .then(() => res.redirect('/'))

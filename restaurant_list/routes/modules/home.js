@@ -2,9 +2,20 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const keyword = req.query.keyword || ''
+  const sort = req.query.sort || 'name'
+  Restaurant.find(
+    {
+      $or: [
+        { name: { $regex: keyword, $options: 'i' } },
+        { category: { $regex: keyword, $options: 'i' } }
+      ]
+    })
     .lean()
-    .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => console.error(error))
+    .sort({ [sort]: 'asc' })
+    .then((restaurants) => {
+      res.render('index', { restaurants, keyword, sort })
+    })
+    .catch(error => console.log(error))
 })
 module.exports = router
