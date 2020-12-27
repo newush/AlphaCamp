@@ -38,9 +38,16 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
+  const userEmail = req.body.email
+  const userPassword = req.body.password
+  const user = users.find(user => user.email === userEmail)
 
-  console.log('req.body', req.body.email)
-  res.render('index')
+  if (user.password === userPassword) {
+    res.render('login', { user })
+  } else {
+    res.render('index')
+  }
+
 })
 
 
