@@ -34,7 +34,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('login')
 })
 
 app.post('/', (req, res) => {
@@ -43,9 +43,9 @@ app.post('/', (req, res) => {
   const error = 'email or password is incorrect'
   const user = users.find(user => user.email === userEmail && user.password === userPassword)
   if (user) {
-    res.render('login', { user })
+    res.render('index', { user })
   } else {
-    res.render('index', { user, error })
+    res.render('login', { user, error })
   }
 })
 
