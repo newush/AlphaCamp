@@ -2,14 +2,12 @@
   <h1>Account Login</h1>
   <div class="form-group mx-sm-3 mb-2">
     <label for="staticEmail2" class="sr-only">Email</label>
-    <input required type="text" class="form-control" id="staticEmail2" placeholder="email@example.com" name="email"
-      value="{{#if user}}{{user.email}}{{/if}}">
-    <span>{{emailErrorMessage}}</span>
+    <input required type="text" class="form-control" id="staticEmail2" placeholder="email@example.com" name="email">
   </div>
   <div class="form-group mx-sm-3 mb-2">
     <label for="inputPassword2" class="sr-only">Password</label>
     <input required type="password" class="form-control" id="inputPassword2" placeholder="password" name="password">
-    <span>{{passwordErrorMessage}}</span>
   </div>
   <button type="submit" class="btn btn-primary mb-2">Login</button>
 </form>
+<span>{{error}}</span>

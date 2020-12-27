@@ -40,15 +40,12 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   const userEmail = req.body.email
   const userPassword = req.body.password
-  const emailErrorMessage = 'email does not exist'
-  const passwordErrorMessage = 'password does not exist'
-  const user = users.find(user => user.email === userEmail)
-  if (user === undefined) {
-    res.render('index', { user, emailErrorMessage })
-  } else if (user.password === userPassword) {
+  const error = 'email or password is incorrect'
+  const user = users.find(user => user.email === userEmail && user.password === userPassword)
+  if (user) {
     res.render('login', { user })
   } else {
-    res.render('index', { user, passwordErrorMessage })
+    res.render('index', { user, error })
   }
 })
 
